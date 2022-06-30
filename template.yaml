@@ -51,13 +51,13 @@ spec:
         targetPath: ./community
         url: https://github.com/backstage/community/tree/main/backstage-community-sessions
 
-    - id: publish
-      name: Publish
-      action: publish:github
-      input:
-        allowedHosts: ['github.com']
-        description: This is ${{ parameters.name }}
-        repoUrl: ${{ parameters.repoUrl }}
+#     - id: publish
+#       name: Publish
+#       action: publish:github
+#       input:
+#         allowedHosts: ['github.com']
+#         description: This is ${{ parameters.name }}
+#         repoUrl: ${{ parameters.repoUrl }}
 
     - id: register
       name: Register
