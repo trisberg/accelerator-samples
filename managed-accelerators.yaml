@@ -4,7 +4,7 @@ metadata:
   name: managed-accelerators
   namespace: accelerator-system
 spec:
-  serviceAccountName: accelerator-server
+  serviceAccountName: accelerator-controller-manager
 
   fetch:
   - git:
