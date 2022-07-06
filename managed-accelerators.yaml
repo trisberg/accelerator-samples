@@ -15,4 +15,3 @@ spec:
   - ytt: {}
   deploy: 
   - kapp: {}
-Footer
