@@ -10,6 +10,7 @@ spec:
   - git:
       url: https://github.com/trisberg/accelerator-samples
       ref: origin/main
+      subPath: resources
 
   template:
   - ytt: {}
