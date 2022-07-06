@@ -3,8 +3,8 @@ apiVersion: accelerator.apps.tanzu.vmware.com/v1alpha1
 kind: Accelerator
 metadata:
   name: managed-hello-world
-  displayName: Managed Hello World
 spec:
+  displayName: Managed Hello World
   git:
     url: https://github.com/sample-accelerators/hello-world
     ref:
