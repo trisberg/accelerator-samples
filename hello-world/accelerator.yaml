@@ -26,6 +26,8 @@ accelerator:
     label: The message the app should display
     description: The message will be prepended with the string 'Hello '
     defaultValue: World
+  imports:
+  - name: tap-workload
 
 engine:
   merge:
