@@ -65,15 +65,15 @@ engine:
           with: "#artifactId"
       - type: RewritePath
         rewriteTo: "#filename"
-    # - include: [ "kubernetes/tap/workload.yaml" ]
-    #   condition: "#deploymentType == 'workload'"
-    #   chain:
-    #   - type: ReplaceText
-    #     substitutions:
-    #     - text: ": hello-fun"
-    #       with: "': ' + #artifactId"
-    #   - type: RewritePath
-    #     rewriteTo: "'config/' + #filename"
+    - include: [ "kubernetes/tap/workload.yaml" ]
+      condition: "#deploymentType == 'workload'"
+      chain:
+      - type: ReplaceText
+        substitutions:
+        - text: ": hello-fun"
+          with: "': ' + #artifactId"
+      - type: RewritePath
+        rewriteTo: "'config/' + #filename"
     - include: [ "kubernetes/tap/Tiltfile" ]
       condition: "#deploymentType == 'workload'"
       chain:
@@ -92,13 +92,13 @@ engine:
       chain:
       - type: RewritePath
         rewriteTo: "#filename"
-    # - include: [ "catalog/*.yaml" ]
-    #   condition: "#deploymentType != 'none'"
-    #   chain:
-    #   - type: ReplaceText
-    #     substitutions:
-    #     - text: hello-fun
-    #       with: "#artifactId"
+    - include: [ "catalog/*.yaml" ]
+      condition: "#deploymentType != 'none'"
+      chain:
+      - type: ReplaceText
+        substitutions:
+        - text: hello-fun
+          with: "#artifactId"
     - name: README
       type: Combo
       onConflict: Append
@@ -125,12 +125,16 @@ engine:
           rewriteTo: "'README.md'"
   - merge:
     - include: [ "**" ]
-    - type: InvokeFragment
-      reference: java-version
-    - type: InvokeFragment
-      reference: tap-workload
-      let: # this should be provided by the caller
-      - name: "gitRepository"
-        expression: "'https://github.com/trisberg/' + #artifactId"
-      - name: "gitBranch"
-        expression: "'main'"
+    - chain:
+      - type: InvokeFragment
+        reference: java-version
+  - merge:
+    - include: [ "**" ]
+    - chain:
+      - type: InvokeFragment
+        reference: tap-workload
+        let: # this should be provided by the caller
+        - name: "gitRepository"
+          expression: "'https://github.com/trisberg/' + #artifactId"
+        - name: "gitBranch"
+          expression: "'test'"
