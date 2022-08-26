@@ -129,3 +129,8 @@ engine:
       reference: java-version
     - type: InvokeFragment
       reference: tap-workload
+      let: # this should be provided by the caller
+      - name: "gitRepository"
+        expression: "'https://github.com/trisberg/' + #artifactId"
+      - name: "gitBranch"
+        expression: "'main'"
