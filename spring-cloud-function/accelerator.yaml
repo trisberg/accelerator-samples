@@ -32,6 +32,21 @@ accelerator:
     dependsOn:
       name: deploymentType
       value: workload
+
+  # this should be provided by the caller
+  - name: gitRepository
+    inputType: text
+    defaultValue: ""
+    dependsOn:
+      name: deploymentType
+      value: workload
+  - name: gitBranch
+    inputType: text
+    defaultValue: "main"
+    dependsOn:
+      name: deploymentType
+      value: workload
+
   imports:
   - name: java-version
   - name: tap-workload
@@ -127,14 +142,14 @@ engine:
     - include: [ "**" ]
     - chain:
       - type: InvokeFragment
-        reference: java-version
+        reference: tap-workload
+        # let: # this should be provided by the caller
+        # - name: "gitRepository"
+        #   expression: "'https://github.com/trisberg/' + #artifactId"
+        # - name: "gitBranch"
+        #   expression: "'test'"
   - merge:
     - include: [ "**" ]
     - chain:
       - type: InvokeFragment
-        reference: tap-workload
-        let: # this should be provided by the caller
-        - name: "gitRepository"
-          expression: "'https://github.com/trisberg/' + #artifactId"
-        - name: "gitBranch"
-          expression: "'test'"
+        reference: java-version
